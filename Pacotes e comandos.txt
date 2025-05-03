@@ -1,0 +1,15 @@
+Pacotes para comunicação com banco de dados
+Microsoft.EntityFrameworkCore
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.Sqlite
+Microsoft.EntityFrameworkCore.Tools
+
+Pacotes para documentação
+Swashbuckle.AspNetCore
+Swashbuckle.AspNetCore.Swagger
+
+---------------------------
+
+dotnet tool install --global dotnet-ef
+dotnet ef migrations add NomeDaMigration
+dotnet ef database update
