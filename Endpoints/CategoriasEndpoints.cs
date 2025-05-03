@@ -55,9 +55,5 @@ namespace Tarefas.API.Endpoints
                 return Results.Ok("Categoria Deletada com sucesso");
             });            
         }
-      //  public static void MapTarefasEndpoints(this WebApplication app)
-      //  {
-      //      app.MapGet("/Tarefas", async (TarefasDbContext db) => await db.Tarefas.ToListAsync());
-      //  }
     }
 }
