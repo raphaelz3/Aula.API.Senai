@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tarefas.API.Context;
+using Tarefas.API.DTO;
 using Tarefas.API.Model;
 
 namespace Tarefas.API.Endpoints
@@ -10,14 +11,22 @@ namespace Tarefas.API.Endpoints
         {
             app.MapGet("/Tarefas", async (TarefasDbContext db) => await db.Tarefas.ToListAsync());
 
-            app.MapGet("/Tarefas/{id}", async (int id, TarefasDbContext db) =>
-                await db.Tarefas.FindAsync(id) is Tarefa tarefa
-                ? Results.Ok(tarefa)
-                : Results.NotFound());
+            app.MapGet("/Tarefas/{id}", async (Guid id, TarefasDbContext db) =>
+                {
+                    var tarefa = await db.Tarefas.FindAsync(id);
 
-            app.MapPost("/Tarefas", async (Tarefa tarefa, TarefasDbContext db) =>
+                });
+
+            app.MapPost("/Tarefas", async (TarefaDTOPost tarefaDTO, TarefasDbContext db) =>
             {
-                if (tarefa == null) return Results.BadRequest("Requisicao invalida");
+                if (tarefaDTO == null) return Results.BadRequest("Requisicao invalida");
+
+                Tarefa tarefa = new Tarefa()
+                {
+                    Nome = tarefaDTO.Nome,
+                    Detalhe = tarefaDTO.Detalhe,
+                    CategoriaId = tarefaDTO.CategoriaId,
+                };
 
                 db.Tarefas.Add(tarefa);
                 await db.SaveChangesAsync();
