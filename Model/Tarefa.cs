@@ -12,7 +12,12 @@
         public bool Concluida { get; set; } = false;
         public DateTime DataCadastro { get; private set; } = DateTime.Now;
         public DateTime? DataConclusao { get; private set; } = null;
-        public int CategoriId { get; set; }
-        public Categoria Categoria { get; private set; }        
+        public int CategoriaId { get; set; }
+        public Categoria Categoria { get; private set; }
+        public void ConcluirTarefa()
+        {
+            Concluida = true;
+            DataConclusao = DateTime.Now;
+        }
     }
 }
